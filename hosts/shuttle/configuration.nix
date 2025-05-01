@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -10,11 +10,16 @@
       ./hardware-configuration.nix
     ];
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.grub.device = "nodev";
   boot.loader.grub.efiSupport = true;
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   networking.hostName = "shuttle";
   networking.networkmanager.enable = true;
@@ -40,6 +45,8 @@
     xkb = {
       layout = "us";
     }; 
+    autoRepeatDelay = 250;
+    autoRepeatInterval = 30;
     windowManager.bspwm.enable = true;
   };
   # HiDPI
@@ -63,6 +70,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  services.blueman.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.eethern = {
     isNormalUser = true;
@@ -78,8 +87,12 @@
   environment.systemPackages = with pkgs; [
     vim 
     neovim
-    fennel
+    fennel 
+    lua
+    luajit
+    python3
 
+    acpi
     alacritty
     tmux
     git
@@ -89,17 +102,24 @@
     sqlite
 
     polybar
+    zscroll
     rofi
     sxhkd
 
     qutebrowser
     firefox
 
+    bash
     fish
-    fzf
     fishPlugins.fzf-fish
+    fzf
     starship
+    ranger
     zoxide
+    ripgrep
+    fd
+    killall
+    jq
   ];
 
   # fish
@@ -123,8 +143,6 @@
       tmuxPlugins.yank
       tmuxPlugins.rose-pine
     ];
-    
-    
   };
 
   programs.git = {
@@ -158,14 +176,15 @@
 
   # Fonts
   fonts = {
-    enableDefaultPackages = true; 
     packages = with pkgs; [       
       iosevka                     
-      (nerdfonts.override { fonts  = [ "Iosevka" ]; })
+      font-awesome
+      material-icons
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
     ];                            
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Iosevka" ];
+        monospace = [ "Iosevka Nerd Font Mono" ];
       };
     };
   };
