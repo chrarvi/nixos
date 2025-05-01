@@ -101,6 +101,12 @@
     stow
     sqlite
 
+    cmake
+    gnumake 
+    gcc
+    autoconf
+    automake
+
     polybar
     zscroll
     rofi
@@ -121,6 +127,8 @@
     killall
     jq
   ];
+
+    
 
   # fish
   programs.bash = {
