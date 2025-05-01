@@ -86,7 +86,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     vim 
-    neovim
+    inputs.neovim-nightly.packages.${system}.default
     fennel 
     lua
     luajit
