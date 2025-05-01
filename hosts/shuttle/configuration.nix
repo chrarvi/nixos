@@ -128,16 +128,17 @@
         # term
         alacritty
         bash
+        fd
         fish
         fishPlugins.fzf-fish
         fzf
-        starship
-        ranger
-        zoxide
-        ripgrep
-        fd
-        killall
+        htop
         jq
+        killall
+        ranger
+        ripgrep
+        starship
+        zoxide
     ];
 
 
