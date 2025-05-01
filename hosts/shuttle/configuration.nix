@@ -120,6 +120,8 @@
         wofi
         hyprpaper
         hyprlock
+        inotify-tools
+        mako
 
         # apps
         qutebrowser
