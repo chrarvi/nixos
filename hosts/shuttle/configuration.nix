@@ -6,8 +6,9 @@
 
 {
     imports =
-        [ # Include the results of the hardware scan.
+        [
             ./hardware-configuration.nix
+            ../../modules/gfx/hyprland/default.nix
         ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -87,20 +88,19 @@
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
-        lemurs 
-
         vim 
-        inputs.neovim-nightly.packages.${system}.default
+        inputs.neovim-nightly.packages.${system}.default  # neovim
 
+        # python
         python3
         pyright
 
+        # lua
         fennel 
         lua
         luajit
 
         acpi
-        alacritty
         tmux
         git
         wget
@@ -108,20 +108,25 @@
         stow
         sqlite
 
+        # build c
         cmake
         gnumake 
         gcc
         autoconf
         automake
 
-        polybar
-        zscroll
-        rofi
-        sxhkd
+        # wayland
+        waybar
+        wofi
+        hyprpaper
+        hyprlock
 
+        # apps
         qutebrowser
         firefox
 
+        # term
+        alacritty
         bash
         fish
         fishPlugins.fzf-fish
