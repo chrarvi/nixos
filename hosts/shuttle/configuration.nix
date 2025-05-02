@@ -51,10 +51,20 @@
         windowManager.bspwm.enable = true;
     };
     # HiDPI
-    environment.variables = {
+    environment.variables = rec {
         GDK_SCALE = "2";
         GDK_DPI_SCALE = "0.5";
         _JAVA_OPTIONS = "-Dsun.java2d.uiScale=2";
+        XDG_CACHE_HOME  = "$HOME/.cache";
+        XDG_CONFIG_HOME = "$HOME/.config";
+        XDG_DATA_HOME   = "$HOME/.local/share";
+        XDG_STATE_HOME  = "$HOME/.local/state";
+
+        # Not officially in the specification
+        XDG_BIN_HOME    = "$HOME/.local/bin";
+        PATH = [ 
+            "${XDG_BIN_HOME}"
+        ];
     };
 
     services.displayManager.ly = {
@@ -82,19 +92,6 @@
         packages = with pkgs; [
             firefox
             tree
-        ];
-    };
-
-    environment.sessionVariables = rec {
-        XDG_CACHE_HOME  = "$HOME/.cache";
-        XDG_CONFIG_HOME = "$HOME/.config";
-        XDG_DATA_HOME   = "$HOME/.local/share";
-        XDG_STATE_HOME  = "$HOME/.local/state";
-
-        # Not officially in the specification
-        XDG_BIN_HOME    = "$HOME/.local/bin";
-        PATH = [ 
-            "${XDG_BIN_HOME}"
         ];
     };
 
