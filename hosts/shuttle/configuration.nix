@@ -130,6 +130,7 @@
         rofi-wayland
         hyprpaper
         hyprlock
+        hyprsunset
         inotify-tools
         mako
         kanshi
@@ -137,6 +138,7 @@
         # apps
         qutebrowser
         firefox
+        grim
         (flameshot.override { enableWlrSupport = true; })
 
         # term
