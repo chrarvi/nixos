@@ -132,6 +132,7 @@
         hyprlock
         inotify-tools
         mako
+        kanshi
 
         # apps
         qutebrowser
