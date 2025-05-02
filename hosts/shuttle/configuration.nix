@@ -46,7 +46,7 @@
         xkb = {
             layout = "us";
         }; 
-        autoRepeatDelay = 250;
+        autoRepeatDelay = 100;
         autoRepeatInterval = 30;
         windowManager.bspwm.enable = true;
     };
@@ -117,7 +117,7 @@
 
         # wayland
         waybar
-        wofi
+        rofi-wayland
         hyprpaper
         hyprlock
         inotify-tools
