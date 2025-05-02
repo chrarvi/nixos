@@ -137,6 +137,7 @@
         # apps
         qutebrowser
         firefox
+        (flameshot.override { enableWlrSupport = true; })
 
         # term
         alacritty
@@ -154,8 +155,6 @@
         starship
         zoxide
     ];
-
-
 
     # fish
     programs.bash = {
