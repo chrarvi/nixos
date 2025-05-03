@@ -137,8 +137,10 @@
         hyprpaper
         hyprlock
         hyprsunset
+        vanilla-dmz
         inotify-tools
         kanshi
+        ddcutil
 
         # apps
         qutebrowser
