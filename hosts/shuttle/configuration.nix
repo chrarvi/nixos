@@ -95,6 +95,12 @@
         ];
     };
 
+    nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+            # Add additional package names here
+            "spotify"
+        ];
+
     # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
@@ -132,13 +138,14 @@
         hyprlock
         hyprsunset
         inotify-tools
-        mako
         kanshi
 
         # apps
         qutebrowser
         firefox
         grim
+        dunst
+        spotify
         (flameshot.override { enableWlrSupport = true; })
 
         # term
@@ -151,7 +158,9 @@
         htop
         jq
         killall
+        libnotify
         pulsemixer
+        playerctl
         ranger
         ripgrep
         starship
