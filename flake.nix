@@ -11,7 +11,7 @@
       shuttle = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
-          ./hosts/shuttle/configuration.nix
+          ./hosts/shuttle
         ];
         specialArgs = { inherit inputs; };
       };

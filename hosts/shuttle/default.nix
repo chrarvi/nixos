@@ -171,6 +171,7 @@
         ripgrep
         starship
         zoxide
+        pass-wayland
     ];
 
     # fish
