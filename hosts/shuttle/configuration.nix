@@ -99,6 +99,7 @@
         builtins.elem (lib.getName pkg) [
             # Add additional package names here
             "spotify"
+            "discord"
         ];
 
     # List packages installed in system profile. To search, run:
@@ -148,7 +149,10 @@
         grim
         dunst
         spotify
+        discord
         (flameshot.override { enableWlrSupport = true; })
+        bitwarden-cli
+        bitwarden-desktop
 
         # term
         alacritty
