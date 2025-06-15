@@ -2,8 +2,8 @@
   description = "An example NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
-    neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+    # neovim-nightly.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = { self, nixpkgs, ... } @ inputs: {

@@ -106,7 +106,9 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
         vim 
-        inputs.neovim-nightly.packages.${system}.default  # neovim
+        neovim
+        # inputs.neovim-nightly.packages.${system}.default  # neovim
+        emacs-pgtk
 
         # python
         python3
@@ -137,7 +139,7 @@
         rofi-wayland
         hyprpaper
         hyprlock
-        hyprsunset
+        gammastep
         vanilla-dmz
         inotify-tools
         kanshi
@@ -211,10 +213,13 @@
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     programs.mtr.enable = true;
-    programs.gnupg.agent = {
-        enable = true;
-        enableSSHSupport = true;
-    };
+
+    # programs.gnupg.agent = {
+        # enable = true;
+        # enableSSHSupport = true;
+    # };
+
+    programs.ssh.startAgent = true;
 
     # List services that you want to enable:
 
@@ -232,7 +237,7 @@
             iosevka                     
             font-awesome
             material-icons
-            (nerdfonts.override { fonts = [ "Iosevka" ]; })
+            nerd-fonts.iosevka
         ];                            
         fontconfig = {
             defaultFonts = {
