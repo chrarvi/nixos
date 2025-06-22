@@ -62,6 +62,10 @@
 
         # Not officially in the specification
         XDG_BIN_HOME    = "$HOME/.local/bin";
+
+        # Get the ssh agent to use sockets (omit .socket)
+        SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
+
         PATH = [ 
             "${XDG_BIN_HOME}"
         ];
