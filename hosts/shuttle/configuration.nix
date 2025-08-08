@@ -59,12 +59,13 @@
         XDG_CONFIG_HOME = "$HOME/.config";
         XDG_DATA_HOME   = "$HOME/.local/share";
         XDG_STATE_HOME  = "$HOME/.local/state";
+        XDG_RUNTIME_DIR  = "/run/user/$UID";
 
         # Not officially in the specification
         XDG_BIN_HOME    = "$HOME/.local/bin";
 
         # Get the ssh agent to use sockets (omit .socket)
-        SSH_AUTH_SOCK = "$XDG_RUNTIME_DIR/ssh-agent";
+        SSH_AUTH_SOCK = "${XDG_RUNTIME_DIR}/ssh-agent";
 
         PATH = [ 
             "${XDG_BIN_HOME}"
@@ -92,11 +93,7 @@
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.eethern = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-        packages = with pkgs; [
-            firefox
-            tree
-        ];
+        extraGroups = [ "wheel" ];
     };
 
     nixpkgs.config.allowUnfreePredicate = pkg:
@@ -110,18 +107,11 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
         vim 
-        neovim
-        # inputs.neovim-nightly.packages.${system}.default  # neovim
-        emacs-pgtk
+        bash
+        htop
+        killall
 
-        # python
         python3
-        pyright
-
-        # lua
-        fennel 
-        lua
-        luajit
 
         acpi
         tmux
@@ -129,14 +119,6 @@
         wget
         xclip
         stow
-        sqlite
-
-        # build c
-        cmake
-        gnumake 
-        gcc
-        autoconf
-        automake
 
         # wayland
         waybar
@@ -148,48 +130,8 @@
         inotify-tools
         kanshi
         ddcutil
-
-        # apps
-        qutebrowser
-        firefox
-        grim
-        dunst
-        spotify
-        discord
-        (flameshot.override { enableWlrSupport = true; })
-        bitwarden-cli
-        bitwarden-desktop
-
-        # term
-        alacritty
-        bash
-        fd
-        fish
-        fishPlugins.fzf-fish
-        fzf
-        htop
-        jq
-        killall
-        libnotify
-        pulsemixer
-        playerctl
-        ranger
-        ripgrep
-        starship
-        zoxide
-        pass-wayland
+        wl-clipboard
     ];
-
-    # fish
-    programs.bash = {
-        interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-      shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-        '';
-    };
 
     # tmux
     programs.tmux = {
@@ -201,17 +143,6 @@
             tmuxPlugins.yank
             tmuxPlugins.rose-pine
         ];
-    };
-
-    programs.git = {
-        enable = true;
-        config = {
-            user = {
-                name = "Christoffer Arvidsson";
-                email = "christoffer@arvidson.nu";
-            };
-            core.editor = "vim";
-        };
     };
 
     # Some programs need SUID wrappers, can be configured further or are
@@ -280,6 +211,5 @@
     #
     # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
     system.stateVersion = "24.05"; # Did you read the comment?
-
 }
 
