@@ -133,16 +133,8 @@
         wl-clipboard
     ];
 
-    # tmux
     programs.tmux = {
         enable = true;
-        plugins = with pkgs; [
-            tmuxPlugins.sensible
-            tmuxPlugins.continuum
-            tmuxPlugins.prefix-highlight
-            tmuxPlugins.yank
-            tmuxPlugins.rose-pine
-        ];
     };
 
     # Some programs need SUID wrappers, can be configured further or are
