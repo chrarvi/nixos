@@ -69,18 +69,6 @@
         history.size = 10000;
     };
 
-    programs.tmux = {
-        enable = true;
-        plugins = with pkgs; [
-            tmuxPlugins.sensible
-            tmuxPlugins.continuum
-            tmuxPlugins.prefix-highlight
-            tmuxPlugins.yank
-            tmuxPlugins.rose-pine
-        ];
-    };
-
-
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
     # when a new Home Manager release introduces backwards
