@@ -110,6 +110,7 @@
         bash
         htop
         killall
+        pulseaudio  # only for pactl, we use pipewire elsewhere
 
         python3
 
