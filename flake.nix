@@ -19,7 +19,7 @@
                     {
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.eethern = ./hosts/shuttle/home.nix;
+                        home-manager.users.eethern = ./users/eethern/home.nix;
 
                     }
                 ];
