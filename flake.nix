@@ -7,6 +7,10 @@
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
     };
+    dotfiles = {
+        url = "github:chrarvi/dotfiles";
+        flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
@@ -21,6 +25,9 @@
                         home-manager.useUserPackages = true;
                         home-manager.users.eethern = ./users/eethern/home.nix;
 
+                        home-manager.extraSpecialArgs = {
+                            inherit (inputs) dotfiles;
+                        };
                     }
                 ];
             };

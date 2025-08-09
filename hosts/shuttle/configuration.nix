@@ -11,8 +11,6 @@
             ../../modules/gfx/hyprland/default.nix
         ];
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -101,6 +99,7 @@
             # Add additional package names here
             "spotify"
             "discord"
+            "dropbox"
         ];
 
     # List packages installed in system profile. To search, run:
@@ -132,6 +131,8 @@
         kanshi
         ddcutil
         wl-clipboard
+
+        dropbox
     ];
 
     programs.tmux = {

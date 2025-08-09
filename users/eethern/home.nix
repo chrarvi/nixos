@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, dotfiles, ... }:
 
 {
     home.packages = with pkgs; [
@@ -13,12 +13,16 @@
 
         sqlite
 
-        # build c
+        # dev
         cmake
         gnumake 
         gcc
         autoconf
         automake
+
+        # pdf
+        pandoc
+        sioyek
 
         # apps
         qutebrowser
@@ -51,22 +55,37 @@
 
     ];
 
+    home.sessionVariables = {
+        EDITOR = "vim";
+    };
+
+    xdg.configFile = {
+        zsh.source = "${dotfiles}/zsh/.config/zsh";
+        starship.source = "${dotfiles}/zsh/.config/starship";
+    };
+
+    # Hack to make zsh use .config
+    home.file.".zshenv".text = ''
+        export ZDOTDIR="${config.xdg.configHome}/zsh"
+    '';
+
     programs.git = {
         enable = true;
         userName  = "Christoffer Arvidsson";
         userEmail = "christoffer@arvidson.nu";
     };
 
-    programs.zsh = {
-        enable = true;
-        # enableCompletions = true;
-        # autosuggestions.enable = true;
-        # syntaxHighlighting.enable = true;
-
-        shellAliases = {
-            update = "sudo nixos-rebuild switch";
+    systemd.user.services.dropbox = {
+        Unit = {
+            Description = "Dropbox service";
         };
-        history.size = 10000;
+        Install = {
+            WantedBy = [ "default.target" ];
+        };
+        Service = {
+            ExecStart = "${pkgs.dropbox}/bin/dropbox";
+            Restart = "on-failure";
+        };
     };
 
     # This value determines the Home Manager release that your
